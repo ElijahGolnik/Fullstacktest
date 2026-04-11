@@ -21,14 +21,13 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      # Runs a node24 action defined in .github/actions/node24-action
-      - name: Run node24 action
-        uses: ./.github/actions/node24-action
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
