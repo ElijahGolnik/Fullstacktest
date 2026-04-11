@@ -1,0 +1,5 @@
+name: Node24 App Action
+description: Runs a Node.js script using node24 and src/App.js
+runs:
+  using: 'node24'
+  main: 'src/App.js'
