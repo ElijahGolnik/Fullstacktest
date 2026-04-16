@@ -7,4 +7,3 @@
   </ol>
 </article>
 
-export default App;
