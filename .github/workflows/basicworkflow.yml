@@ -21,10 +21,10 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker Image
-        run: docker build -t myapp:${{ github.sha }} .
+        run: docker build -t myapp:${{ github.sha }} ./fullstackapp
 
       - name: Build and tag Docker Image
-        run: docker build -t myapp:${{ github.sha }}  -t myapp${{ github.ref }} .
+        run: docker build -t myapp:${{ github.sha }}  -t myapp${{ github.ref }} ./fullstackapp
 
       - name: Log in to Docker Hub
         run: |
