@@ -32,6 +32,7 @@ jobs:
       - name: Push Docker Image to Docker Hub
         uses: docker/build-push-action@v5
         with:
+          context: ./fullstackapp
           push: true
           tags: myapp:${{ github.sha }}, myapp:${{ github.ref }}
 
