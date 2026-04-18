@@ -34,7 +34,7 @@ jobs:
         with:
           context: ./fullstackapp
           push: true
-          tags: myapp:${{ github.sha }}, myapp:${{ github.ref }}
+          tags: myapp${{ github.ref }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
