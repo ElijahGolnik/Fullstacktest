@@ -34,7 +34,9 @@ jobs:
         with:
           context: ./fullstackapp
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }},${{ secrets.DOCKER_USERNAME }}/myapp:latest
+          secrets: |
+            user = ${{ secrets.DOCKER_USERNAME }}
+          tags: user/myapp:${{ github.sha }},user/myapp:latest
           platforms: linux/amd64,linux/arm64
 
       - name: Set up QEMU
