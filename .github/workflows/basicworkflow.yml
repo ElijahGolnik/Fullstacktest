@@ -34,7 +34,7 @@ jobs:
         with:
           context: ./fullstackapp
           push: true
-          tags: elijahgolnik@gmail.com/myapp:${{ github.sha }},elijahgolnik@gmail.com/myapp:latest
+          tags: elijahgolnik/myapp:${{ github.sha }},elijahgolnik/myapp:latest
           platforms: linux/amd64,linux/arm64
 
       - name: Set up QEMU
