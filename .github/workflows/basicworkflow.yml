@@ -34,16 +34,11 @@ jobs:
         with:
           context: ./fullstackapp
           push: true
-          secrets: |
-            user = ${{ secrets.DOCKER_USERNAME }}
-          tags: user/myapp:${{ github.sha }},user/myapp:latest
+          tags: elijahgolnik@gmail.com/myapp:${{ github.sha }},elijahgolnik@gmail.com/myapp:latest
           platforms: linux/amd64,linux/arm64
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-
-      - name: Set up Buildx
-        uses: docker/setup-buildx-action@v1
 
       - name: Scan Docker image for vulnerabilities
         run: |
