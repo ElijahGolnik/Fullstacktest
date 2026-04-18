@@ -27,7 +27,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build and tag Docker Image
-        run: docker build -t myapp:${{ github.sha }}  -t myapp:${{ github.ref }} ./fullstackapp
+        run: docker build -t myapp:${{ github.sha }}  -t myapp:latest ./fullstackapp
 
       - name: Push Docker Image to Docker Hub
         uses: docker/build-push-action@v5
