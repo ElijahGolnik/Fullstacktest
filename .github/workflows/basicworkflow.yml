@@ -27,14 +27,14 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build and tag Docker Image
-        run: docker build -t myapp:${{ github.sha }}  -t myapp${{ github.ref }} ./fullstackapp
+        run: docker build -t myapp:${{ github.sha }}  -t myapp:${{ github.ref }} ./fullstackapp
 
       - name: Push Docker Image to Docker Hub
         uses: docker/build-push-action@v5
         with:
           context: ./fullstackapp
           push: true
-          tags: myapp${{ github.ref }}
+          tags: myapp${{ github.sha }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
