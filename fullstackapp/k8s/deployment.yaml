@@ -16,4 +16,4 @@ spec:
       - name: myapp
         image: elijahgolnik/myapp:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
