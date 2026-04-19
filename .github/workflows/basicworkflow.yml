@@ -40,10 +40,12 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
-      - name: Scan Docker image for vulnerabilities
-        run: |
-          trivy image myapp:${{ github.sha }}
-          if [ $? -ne 0 ]; then exit 1; fi
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: myapp:${{ github.sha }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
         
       - name: Deploy to Kubernetes
         run: |
