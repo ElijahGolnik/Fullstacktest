@@ -18,7 +18,7 @@ spec:
       - name: myapp
         image: elijahgolnik/myapp:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         resources:
           requests:
             cpu: "0.5"
