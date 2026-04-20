@@ -49,8 +49,8 @@ jobs:
         
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f fullstackapp/k8s/deployment.yaml 
-          kubectl apply -f fullstackapp/k8s/service.yaml 
+          kubectl apply -f fullstackapp/k8s/deployment.yaml --validate=false
+          kubectl apply -f fullstackapp/k8s/service.yaml --validate=false
 
       
           
