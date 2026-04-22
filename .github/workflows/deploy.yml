@@ -1,0 +1,58 @@
+name: Build and Deploy to Local Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t yourdockerhubusername/fullstackapp:latest .
+
+      # 3. Login to Docker Hub
+      - name: Login to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      # 4. Push image
+      - name: Push Docker image
+        run: |
+          docker push yourdockerhubusername/fullstackapp:latest
+
+      # 5. Ensure kubeconfig is available
+      - name: Set kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          cp ~/.kube/config $HOME/.kube/config
+
+      # 6. Verify cluster connection (good for debugging)
+      - name: Verify Kubernetes connection
+        run: |
+          kubectl config current-context
+          kubectl get nodes
+
+      # 7. Deploy manifests
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f fullstackapp/k8s/
+
+      # 8. Force rollout (important when using :latest)
+      - name: Restart deployment
+        run: |
+          kubectl rollout restart deployment fullstackapp
+
+      # 9. Show status (debug visibility)
+      - name: Show deployment status
+        run: |
+          kubectl get pods
+          kubectl get svc
