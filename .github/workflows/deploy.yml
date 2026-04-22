@@ -25,14 +25,12 @@ jobs:
       # 2. Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t yourdockerhubusername/fullstackapp:latest .
-
+          docker build -t elijahgolnik/fullstackapp:latest .
       
-
       # 4. Push image
       - name: Push Docker image
         run: |
-          docker push yourdockerhubusername/fullstackapp:latest
+          docker push elijahgolnik/fullstackapp:latest
 
       # 5. Ensure kubeconfig is available
       - name: Set kubeconfig
