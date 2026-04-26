@@ -48,7 +48,7 @@ jobs:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
 
       - name: Set kubectl context
-        run: kubectl config use-context docker-desktop
+        run: kubectl config use-context my-docker
 
       # 6. Verify cluster connection (good for debugging)
       - name: Verify Kubernetes connection
