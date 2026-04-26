@@ -40,10 +40,6 @@ jobs:
           tags: elijahgolnik/myapp:${{ github.sha }},elijahgolnik/myapp:latest
           platforms: linux/amd64,linux/arm64
 
-      # 5. Ensure kubeconfig is available
-      - name: Set kubeconfig
-        run: cp ~/.kube/config C:/Users/proto/.kube/config
-
       # 6. Verify cluster connection (good for debugging)
       - name: Verify Kubernetes connection
         run: |
