@@ -42,9 +42,7 @@ jobs:
 
       # 5. Ensure kubeconfig is available
       - name: Set kubeconfig
-        run: |
-          mkdir -p $HOME/.kube
-          cp ~/.kube/config $HOME/.kube/config
+        run: cp ~/.kube/config C:/Users/proto/.kube/config
 
       # 6. Verify cluster connection (good for debugging)
       - name: Verify Kubernetes connection
