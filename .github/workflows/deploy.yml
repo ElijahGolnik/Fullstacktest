@@ -40,6 +40,9 @@ jobs:
           tags: elijahgolnik/myapp:${{ github.sha }},elijahgolnik/myapp:latest
           platforms: linux/amd64,linux/arm64
 
+      - name: Set kubectl context
+        run: kubectl config use-context docker-desktop
+
       # 6. Verify cluster connection (good for debugging)
       - name: Verify Kubernetes connection
         run: |
