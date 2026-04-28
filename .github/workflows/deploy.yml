@@ -29,6 +29,17 @@ jobs:
       - name: set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
+      - name: Debug kubeconfig secret
+        run: |
+          if [ -z "$KUBECONFIG_DATA" ]; then
+            echo "KUBECONFIG_DATA is EMPTY"
+            exit 1
+          else
+            echo "KUBECONFIG_DATA is set"
+          fi
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        
       - name: Build and tag Docker Image
         run: docker build -t myapp:${{ github.sha }}  -t myapp:latest ./fullstackapp
 
@@ -45,6 +56,8 @@ jobs:
           mkdir -p $HOME/.kube
           echo "${KUBECONFIG_DATA}" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
 
       - name: Set kubectl context
         run: kubectl config use-context docker-desktop
