@@ -54,6 +54,8 @@ jobs:
         run: |
           kubectl config current-context
           kubectl get nodes
+          kubectl config view
+          kubectl config get-contexts
 
       # 7. Deploy manifests
       - name: Apply Kubernetes manifests
