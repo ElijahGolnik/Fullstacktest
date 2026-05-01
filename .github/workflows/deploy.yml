@@ -58,16 +58,11 @@ jobs:
           kubectl get nodes
 
       # 6. Verify cluster connection (good for debugging)
-      - name: Verify Kubernetes connection
+      - name: Deploy using local kubeconfig
         run: |
-          kubectl config current-context
+          export KUBECONFIG=$HOME/.kube/config
+          kubectl config use-context docker-desktop
           kubectl get nodes
-          kubectl config view
-          kubectl config get-contexts
-
-      # 7. Deploy manifests
-      - name: Apply Kubernetes manifests
-        run: |
           kubectl apply -f fullstackapp/k8s/
 
       # 8. Force rollout (important when using :latest)
