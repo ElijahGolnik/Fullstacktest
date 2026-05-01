@@ -53,7 +53,7 @@ jobs:
 
       - name: Use Windows kubeconfig
         run: |
-          export KUBECONFIG=/mnt/c/Users/eli/.kube/config
+          export KUBECONFIG=/mnt/c/Users/proto/.kube/config
           kubectl config use-context docker-desktop
           kubectl get nodes
 
