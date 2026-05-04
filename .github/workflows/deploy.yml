@@ -29,20 +29,6 @@ jobs:
       - name: set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
-      - name: Debug kubeconfig secret
-        run: |
-          if [ -z "$KUBECONFIG_DATA" ]; then
-            echo "KUBECONFIG_DATA is EMPTY"
-            exit 1
-          else
-            echo "KUBECONFIG_DATA is set"
-          fi
-        env:
-          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
-        
-      - name: Build and tag Docker Image
-        run: docker build -t myapp:${{ github.sha }}  -t myapp:latest ./fullstackapp
-
       - name: Push Docker Image to Docker Hub
         uses: docker/build-push-action@v5
         with:
@@ -56,14 +42,17 @@ jobs:
           export KUBECONFIG=/mnt/c/Users/proto/.kube/config
           kubectl config use-context docker-desktop
           kubectl get nodes
-
-      # 6. Verify cluster connection (good for debugging)
-      - name: Deploy using local kubeconfig
-        run: |
-          export KUBECONFIG=$HOME/.kube/config
-          kubectl config use-context docker-desktop
-          kubectl get nodes
           kubectl apply -f fullstackapp/k8s/
+
+      - name: Wait for Kubernetes
+        run: |
+          kubectl config use-context docker-desktop
+
+          for i in {1..20}; do
+            kubectl get nodes && break
+            echo "Waiting for cluster..."
+            sleep 3
+          done
 
       # 8. Force rollout (important when using :latest)
       - name: Restart deployment
