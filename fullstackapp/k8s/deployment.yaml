@@ -15,6 +15,7 @@ spec:
       containers:   
         - name: fullstackapp
           image: elijahgolnik/fullstackapp:latest
+          image: elijahgolnik/fullstackapp/frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 62566
